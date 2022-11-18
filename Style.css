@@ -1,0 +1,75 @@
+table{
+  width: 50%;
+  height: 30%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10%;
+  background-color: bisque;
+}
+
+body{
+  background-color: rgb(250, 240, 225);
+}
+
+th{
+  background-color: rgb(209, 243, 141);
+  border-radius: 10%;
+  height: 20%;
+  color: hotpink;
+}
+
+tr:nth-child(even) {
+  background-color: #D6EEEE;
+  border-radius: 10%;
+}
+
+tr:hover{
+  background-color: #ddd;
+  color: #000;
+}
+
+#bm{
+  color: wheat;
+  background-color: green;
+  border-color: deepskyblue;
+}
+
+td{
+  width: 20%;
+  height: 30%;
+  text-align: center;
+}
+
+#dlt{
+  color: red;
+  background-color:chartreuse;
+  border-color: pink;
+}
+
+#ac{
+  width: 50%;
+  color: wheat;
+  background-color: green;
+  border-color: yellowgreen;
+  padding: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  font-size: large;
+}
+
+input[type=text], [type=number] {
+  width: 50%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.center{
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 3%;
+  width: 80%;
+  padding: 10px;
+}
