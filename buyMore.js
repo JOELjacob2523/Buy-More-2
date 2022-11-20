@@ -51,3 +51,8 @@ function deleteRow(r) {
   var i = r.parentNode.parentNode.rowIndex;
   document.getElementById("TR").deleteRow(i);
 }
+
+function upperCase(){
+  const x = document.getElementById("UC");
+  x.value = x.value.toUpperCase();
+  }
