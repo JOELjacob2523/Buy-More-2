@@ -1,3 +1,17 @@
+h1{
+  text-align: center;
+  font-size: xxx-large;
+  color: rgb(20, 96, 237);
+}
+h2{
+  text-align: center;
+  font-size: xx-large;
+}
+
+h3{
+  font-size: x-large;
+  text-align: center;
+}
 table{
   width: 50%;
   height: 30%;
@@ -7,19 +21,16 @@ table{
   background-color: bisque;
 }
 
-body{
-  background-color: rgb(250, 240, 225);
-}
-
 th{
   background-color: rgb(209, 243, 141);
   border-radius: 10%;
   height: 20%;
   color: hotpink;
+  font-size: large;
 }
 
 tr:nth-child(even) {
-  background-color: #D6EEEE;
+  background-color: #eed6d6;
   border-radius: 10%;
 }
 

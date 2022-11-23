@@ -1,4 +1,9 @@
-function generateTable(){
+window.onload = function () {
+  generateTable();
+  writeMarketStatus();
+}
+
+function generateTable() {
   let HTML = ``
   for (let i = 0; i < companies.length; i++) {
     let company = companies[i];
@@ -9,7 +14,7 @@ function generateTable(){
     <td>${company.amount}</td>
     <td>$${company.amount * company.price}</td>
     <td><button id="bm" onclick="buyStock(${i})">Buy More</button></td>
-    <td><button id="dlt" value="Delete" onclick="deleteRow(this)">Remove</button></td>
+    <td><button id="dlt" value="Delete" onclick="deleteRow(${i})">Remove</button></td>
   </tr>`
   }
   document.getElementById('TB').innerHTML = HTML;
@@ -17,7 +22,7 @@ function generateTable(){
 
 generateTable();
 
-function buyStock(index){
+function buyStock(index) {
   let amount = Number(
     prompt(`How many ${companies[index].ticker} stocks Whuld you like to buy?`)
   )
@@ -30,29 +35,53 @@ function buyStock(index){
   generateTable();
 }
 
-function showAddCompanyForm(){
+function showAddCompanyForm() {
   document.getElementById('addCompanyForm').style.display = 'block';
 }
 
-function submitForm(){
+function submitForm() {
   let formElement = document.getElementById('addCompanyForm');
   let fd = new FormData(formElement);
   let company = {};
   company.ticker = fd.get('ticker');
   company.price = fd.get('price');
-  company.amount =+ fd.get('amount');
+  company.amount = + fd.get('amount');
   companies.push(company);
   generateTable();
   formElement.reset();
 }
 
 
-function deleteRow(r) {
-  var i = r.parentNode.parentNode.rowIndex;
-  document.getElementById("TR").deleteRow(i);
+function deleteRow(index) {
+  companies.splice(index, 1);
+  generateTable();
 }
 
-function upperCase(){
+function upperCase() {
   const x = document.getElementById("UC");
   x.value = x.value.toUpperCase();
-  }
+}
+
+function isMarketOpen() {
+  let now = new Date();
+  let hour = now.getHours();
+  let min = now.getMinutes();
+  hour += min / 60;
+  return hour >= 9.5 && hour <= 16;
+}
+
+function writeMarketStatus() {
+  let marketStatus = isMarketOpen() ? 'Markets Are Now Open' : 'Markets Are Closed';
+  document.getElementById('market-status').innerHTML = marketStatus;
+  changeColor();
+}
+
+setInterval(function() {
+  let now = new Date().toLocaleString();
+  document.getElementById('date').innerHTML = now;
+}, 1000);
+
+function changeColor(){
+if (isMarketOpen) {document.body.style.backgroundColor = "wheat"}
+else {document.body.style.backgroundColor = "red";}
+}
