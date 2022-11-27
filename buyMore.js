@@ -73,15 +73,27 @@ function isMarketOpen() {
 function writeMarketStatus() {
   let marketStatus = isMarketOpen() ? 'Markets Are Now Open' : 'Markets Are Closed';
   document.getElementById('market-status').innerHTML = marketStatus;
-  changeColor();
+  changeBodyColor();
+  changeFontColor();
 }
 
-setInterval(function() {
+setInterval(function () {
   let now = new Date().toLocaleString();
   document.getElementById('date').innerHTML = now;
 }, 1000);
 
-function changeColor(){
-if (isMarketOpen) {document.body.style.backgroundColor = "wheat"}
-else {document.body.style.backgroundColor = "red";}
+function changeBodyColor() {
+  return isMarketOpen() ? document.body.style.backgroundColor = "wheat" : document.body.style.backgroundColor = "#a93308";
 }
+
+function changeFontColor() {
+  return isMarketOpen() ? document.getElementById('wlcm', 'market-status').style.color = "#934df0" : document.getElementById('wlcm', 'market-status').style.color = "#7ec6ed";
+}
+
+function relativeTime() {
+  const rtf1 = new Intl.RelativeTimeFormat('en', { style: 'narrow' });
+  const relativeTime = rtf1.format(-5, `hours`);
+  console.log(relativeTime);
+}
+
+relativeTime();

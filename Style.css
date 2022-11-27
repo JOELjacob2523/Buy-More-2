@@ -19,13 +19,14 @@ table{
   margin-left: auto;
   margin-top: 10%;
   background-color: bisque;
+  color: blue;
 }
 
 th{
   background-color: rgb(209, 243, 141);
   border-radius: 10%;
   height: 20%;
-  color: hotpink;
+  color: rgb(255, 145, 105);
   font-size: large;
 }
 
