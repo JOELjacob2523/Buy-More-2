@@ -1,6 +1,9 @@
 window.onload = function () {
+  changeBodyColor();
+  isBusinesDay();
   generateTable();
   writeMarketStatus();
+  calculateTime();
 }
 
 function generateTable() {
@@ -73,8 +76,6 @@ function isMarketOpen() {
 function writeMarketStatus() {
   let marketStatus = isMarketOpen() ? 'Markets Are Now Open' : 'Markets Are Closed';
   document.getElementById('market-status').innerHTML = marketStatus;
-  changeBodyColor();
-  changeFontColor();
 }
 
 setInterval(function () {
@@ -83,17 +84,46 @@ setInterval(function () {
 }, 1000);
 
 function changeBodyColor() {
-  return isMarketOpen() ? document.body.style.backgroundColor = "wheat" : document.body.style.backgroundColor = "#a93308";
+  let body = document.body;
+  let marketStatus = isMarketOpen();
+  body.classList.add(marketStatus ? 'open' : 'closed');
+  body.classList.remove(marketStatus ? 'closed' : 'open');
 }
 
-function changeFontColor() {
-  return isMarketOpen() ? document.getElementById('wlcm', 'market-status').style.color = "#934df0" : document.getElementById('wlcm', 'market-status').style.color = "#7ec6ed";
+function isBusinesDay() {
+  return ![0,6].includes(new Date().getDay());
 }
 
-function relativeTime() {
-  const rtf1 = new Intl.RelativeTimeFormat('en', { style: 'narrow' });
-  const relativeTime = rtf1.format(-5, `hours`);
-  console.log(relativeTime);
+function dateToMinutes(date) {
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  return (hours * 60) + minutes;
 }
 
-relativeTime();
+function differentMinutes(from, to) {
+  return dateToMinutes(to) - dateToMinutes(from);
+}
+
+function calculateTime() {
+  const OPEN_MARKET = new Date(new Date().setHours(9,30));
+  const CLOSED_MARKET = new Date(new Date().setHours(16));
+  let fromOpen = differentMinutes(OPEN_MARKET, new Date());
+  let toClose = differentMinutes(new Date(), CLOSED_MARKET);
+  let p = document.querySelector('#HD');
+  if (fromOpen < 0) {
+    p.innerHTML = `There Are ${minutesToTime(fromOpen*-1).h}:${minutesToTime(fromOpen*-1).m} To Market Open`;
+  } else if (toClose > 0) {
+    p.innerHTML = `There Are ${minutesToTime(fromOpen).h}:${minutesToTime(fromOpen).m} From Market Open`;
+  } else{
+    p.innerHTML = `There Are ${minutesToTime(fromOpen).h}:${minutesToTime(fromOpen).m} From Market Closed`;
+  }
+}
+
+setInterval(calculateTime, 1000);
+
+function minutesToTime(minutes){
+  return {
+    h : Math.floor(minutes / 60),
+    m : minutes % 60
+  }
+}

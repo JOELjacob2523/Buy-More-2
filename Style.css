@@ -1,3 +1,13 @@
+body.open{
+  background-color: wheat;
+  color: maroon;
+}
+
+body.closed{
+  background-color: maroon;
+  color: wheat;
+}
+
 h1{
   text-align: center;
   font-size: xxx-large;
@@ -11,6 +21,11 @@ h2{
 h3{
   font-size: x-large;
   text-align: center;
+}
+
+#HD{
+  text-align: center;
+  font-size: large;
 }
 table{
   width: 50%;
