@@ -91,7 +91,14 @@ function changeBodyColor() {
 }
 
 function isBusinesDay() {
-  return ![0,6].includes(new Date().getDay());
+  let today = new Date();
+  let day = today.getDay();
+  let dayList = ["Sunday", "Monday", "Tuesday", "Wednesday ", "Thursday", "Friday", "Saturday",];
+  if (day !=0 && day !=6) {
+    document.getElementById('day-open').innerHTML = `The Markets Are Open On ${dayList[day]}`;
+  } else {
+    document.getElementById('day-open').innerHTML = `The Markets Are Closed Today`;
+  }
 }
 
 function dateToMinutes(date) {
@@ -105,25 +112,25 @@ function differentMinutes(from, to) {
 }
 
 function calculateTime() {
-  const OPEN_MARKET = new Date(new Date().setHours(9,30));
+  const OPEN_MARKET = new Date(new Date().setHours(9, 30));
   const CLOSED_MARKET = new Date(new Date().setHours(16));
   let fromOpen = differentMinutes(OPEN_MARKET, new Date());
   let toClose = differentMinutes(new Date(), CLOSED_MARKET);
   let p = document.querySelector('#HD');
   if (fromOpen < 0) {
-    p.innerHTML = `There Are ${minutesToTime(fromOpen*-1).h}:${minutesToTime(fromOpen*-1).m} To Market Open`;
+    p.innerHTML = `There Are ${minutesToTime(fromOpen * -1).h}:${minutesToTime(fromOpen * -1).m} To Market Open`;
   } else if (toClose > 0) {
     p.innerHTML = `There Are ${minutesToTime(fromOpen).h}:${minutesToTime(fromOpen).m} From Market Open`;
-  } else{
+  } else {
     p.innerHTML = `There Are ${minutesToTime(fromOpen).h}:${minutesToTime(fromOpen).m} From Market Closed`;
   }
 }
 
 setInterval(calculateTime, 1000);
 
-function minutesToTime(minutes){
+function minutesToTime(minutes) {
   return {
-    h : Math.floor(minutes / 60),
-    m : minutes % 60
+    h: Math.floor(minutes / 60),
+    m: minutes % 60
   }
 }
