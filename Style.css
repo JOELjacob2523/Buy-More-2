@@ -100,3 +100,8 @@ input[type=text], [type=number] {
   width: 80%;
   padding: 10px;
 }
+
+#day-open{
+  text-align: center;
+  font-size: large;
+}

@@ -94,7 +94,7 @@ function isBusinesDay() {
   let today = new Date();
   let day = today.getDay();
   let dayList = ["Sunday", "Monday", "Tuesday", "Wednesday ", "Thursday", "Friday", "Saturday",];
-  if (day !=0 && day !=6) {
+  if (day != 0 && day != 6) {
     document.getElementById('day-open').innerHTML = `The Markets Are Open On ${dayList[day]}`;
   } else {
     document.getElementById('day-open').innerHTML = `The Markets Are Closed Today`;
@@ -116,17 +116,17 @@ function calculateTime() {
   const CLOSED_MARKET = new Date(new Date().setHours(16));
   let fromOpen = differentMinutes(OPEN_MARKET, new Date());
   let toClose = differentMinutes(new Date(), CLOSED_MARKET);
+  let fromClose = differentMinutes(CLOSED_MARKET, new Date());
   let p = document.querySelector('#HD');
   if (fromOpen < 0) {
     p.innerHTML = `There Are ${minutesToTime(fromOpen * -1).h}:${minutesToTime(fromOpen * -1).m} To Market Open`;
   } else if (toClose > 0) {
     p.innerHTML = `There Are ${minutesToTime(fromOpen).h}:${minutesToTime(fromOpen).m} From Market Open`;
-  } else {
-    p.innerHTML = `There Are ${minutesToTime(fromOpen).h}:${minutesToTime(fromOpen).m} From Market Closed`;
+  } else if (toClose < 0) {
+    p.innerHTML = `There Are ${minutesToTime(fromClose).h}:${minutesToTime(fromClose).m} From Market Closed`;
   }
+  setInterval(calculateTime, 1000);
 }
-
-setInterval(calculateTime, 1000);
 
 function minutesToTime(minutes) {
   return {
