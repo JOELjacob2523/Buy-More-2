@@ -136,16 +136,14 @@ function minutesToTime(minutes) {
 }
 
 async function getResults(company) {
-  let api = await fetch(`https://api.polygon.io/v2/aggs/ticker/${company}/prev?adjusted=true&apiKey=eCpvZg_ZruTkRqlOEuoyJLEBn_VkmaeV`);
-  api.then(function(response) {
+  let body = await fetch(`https://api.polygon.io/v2/aggs/ticker/${company.ticker}/prev?adjusted=true&apiKey=eCpvZg_ZruTkRqlOEuoyJLEBn_VkmaeV`);
+  //let response = await body.json();
+  //--remove api.then(function(response) {
     let cValue = response.results[0].c;
     console.log(cValue);
-    companies.forEach(company => {
-      if (company.ticker == company.ticker){
        company.price = cValue;
-      }
-  });
-});
+     
+//-- remove });
 }
 
 function showResults() {
