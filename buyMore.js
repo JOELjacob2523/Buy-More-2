@@ -1,9 +1,9 @@
 window.onload = function () {
   changeBodyColor();
-  isBusinesDay();
   generateTable();
   writeMarketStatus();
   calculateTime();
+  isBusinesDay();
 }
 
 function generateTable() {
@@ -74,7 +74,7 @@ function isMarketOpen() {
 }
 
 function writeMarketStatus() {
-  let marketStatus = isMarketOpen() ? 'Markets Are Now Open' : 'Markets Are Closed';
+  let marketStatus = isMarketOpen() ? `Markets are now open` : `Markets are closed`;
   document.getElementById('market-status').innerHTML = marketStatus;
 }
 
@@ -97,7 +97,7 @@ function isBusinesDay() {
   if (day != 0 && day != 6) {
     document.getElementById('day-open').innerHTML = `The Markets Are Open On ${dayList[day]}`;
   } else {
-    document.getElementById('day-open').innerHTML = `The Markets Are Closed Today`;
+    document.getElementById('day-open').innerHTML = `The Markets Are Closed On ${dayList[day]}`;
   }
 }
 
@@ -122,7 +122,7 @@ function calculateTime() {
     p.innerHTML = `There Are ${minutesToTime(fromOpen * -1).h}:${minutesToTime(fromOpen * -1).m} To Market Open`;
   } else if (toClose > 0) {
     p.innerHTML = `There Are ${minutesToTime(fromOpen).h}:${minutesToTime(fromOpen).m} From Market Open`;
-  } else if (toClose < 0) {
+  } else {
     p.innerHTML = `There Are ${minutesToTime(fromClose).h}:${minutesToTime(fromClose).m} From Market Closed`;
   }
   setInterval(calculateTime, 1000);
@@ -134,3 +134,18 @@ function minutesToTime(minutes) {
     m: minutes % 60
   }
 }
+
+function getResults(company) {
+  fetch(`https://api.polygon.io/v2/aggs/ticker/${company}/prev?adjusted=true&apiKey=eCpvZg_ZruTkRqlOEuoyJLEBn_VkmaeV`)
+  .then(response => response.json())
+  .then(data => {
+  let cValue = data.results[0].c;
+  console.log(cValue);
+  return cValue;
+  });
+  }
+  
+  companies.forEach(company => {
+  var result = getResults(company);
+  console.log(result);
+  });

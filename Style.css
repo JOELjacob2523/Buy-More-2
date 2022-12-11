@@ -1,43 +1,43 @@
-body.open{
+body.open {
   background-color: wheat;
   color: maroon;
 }
 
-body.closed{
+body.closed {
   background-color: maroon;
   color: wheat;
 }
 
-h1{
+h1 {
   text-align: center;
   font-size: xxx-large;
   color: rgb(20, 96, 237);
 }
-h2{
+
+h2 {
   text-align: center;
   font-size: xx-large;
 }
 
-h3{
+h3 {
   font-size: x-large;
   text-align: center;
 }
 
-#HD{
+#HD {
   text-align: center;
   font-size: large;
 }
-table{
+
+table {
   width: 50%;
   height: 30%;
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 10%;
+  margin: auto;
   background-color: bisque;
   color: blue;
 }
 
-th{
+th {
   background-color: rgb(209, 243, 141);
   border-radius: 10%;
   height: 20%;
@@ -50,30 +50,30 @@ tr:nth-child(even) {
   border-radius: 10%;
 }
 
-tr:hover{
+tr:hover {
   background-color: #ddd;
   color: #000;
 }
 
-#bm{
+#bm {
   color: wheat;
   background-color: green;
   border-color: deepskyblue;
 }
 
-td{
+td {
   width: 20%;
   height: 30%;
   text-align: center;
 }
 
-#dlt{
+#dlt {
   color: red;
-  background-color:chartreuse;
+  background-color: chartreuse;
   border-color: pink;
 }
 
-#ac{
+#ac {
   width: 50%;
   color: wheat;
   background-color: green;
@@ -84,7 +84,8 @@ td{
   font-size: large;
 }
 
-input[type=text], [type=number] {
+input[type=text],
+[type=number] {
   width: 50%;
   padding: 12px;
   margin: 8px 0;
@@ -93,15 +94,18 @@ input[type=text], [type=number] {
   box-sizing: border-box;
 }
 
-.center{
-  margin-left: 30%;
-  margin-right: 30%;
-  margin-top: 3%;
-  width: 80%;
-  padding: 10px;
+.center {
+  display: block;
+  float: left;
+  width: 500px;
+  height: 100%;
+  position: fixed;
+  top: 20%;
+  margin-left: 70px;
 }
 
-#day-open{
+#day-open {
   text-align: center;
-  font-size: large;
+  font-size: xx-large;
+  font-weight: bold;
 }
