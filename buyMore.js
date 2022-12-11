@@ -135,9 +135,9 @@ function minutesToTime(minutes) {
   }
 }
 
-function getResults(company) {
-  fetch(`https://api.polygon.io/v2/aggs/ticker/${company}/prev?adjusted=true&apiKey=eCpvZg_ZruTkRqlOEuoyJLEBn_VkmaeV`)
-  .then(response => response.json())
+async function getResults(company) {
+  await fetch(`https://api.polygon.io/v2/aggs/ticker/${company}/prev?adjusted=true&apiKey=eCpvZg_ZruTkRqlOEuoyJLEBn_VkmaeV`)
+  .then(response => response.blob())
   .then(data => {
   let cValue = data.results[0].c;
   console.log(cValue);
@@ -145,7 +145,9 @@ function getResults(company) {
   });
   }
   
+  function showResults(){
   companies.forEach(company => {
-  var result = getResults(company);
+  let result = getResults(company);
   console.log(result);
   });
+  }
