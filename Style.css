@@ -109,3 +109,10 @@ input[type=text],
   font-size: xx-large;
   font-weight: bold;
 }
+
+.dayNight{
+  background-color: darkblue;
+  color: wheat;
+  width: 50%;
+  height: auto;
+}

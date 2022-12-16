@@ -1,9 +1,10 @@
 window.onload = function () {
   changeBodyColor();
-  generateTable();
+  //generateTable();
   writeMarketStatus();
   calculateTime();
   isBusinesDay();
+  getResults();
 }
 
 function generateTable() {
@@ -22,8 +23,6 @@ function generateTable() {
   }
   document.getElementById('TB').innerHTML = HTML;
 }
-
-generateTable();
 
 function buyStock(index) {
   let amount = Number(
@@ -135,21 +134,14 @@ function minutesToTime(minutes) {
   }
 }
 
-async function getResults(company) {
-  let api = await fetch(`https://api.polygon.io/v2/aggs/ticker/${company}/prev?adjusted=true&apiKey=eCpvZg_ZruTkRqlOEuoyJLEBn_VkmaeV`);
-  api.then(function(response) {
-    let cValue = response.results[0].c;
-    console.log(cValue);
-    companies.forEach(company => {
-      if (company.ticker == company.ticker){
-       company.price = cValue;
-      }
-  });
-});
-}
-
-function showResults() {
-  companies.forEach(company => {
-    let result = getResults(company);
-  });
+async function getResults() {
+  for (let i = 0; i < companies.length; i++) {
+   let company = companies[i];
+  let body = await fetch(`https://api.polygon.io/v2/aggs/ticker/${company.ticker}/prev?adjusted=true&apiKey=eCpvZg_ZruTkRqlOEuoyJLEBn_VkmaeV`);
+  let response = await body.json();
+  let cValue = await response.results[0].c;
+  console.log(cValue);
+  company.price = cValue;
+  }
+  generateTable();
 }
