@@ -1,6 +1,5 @@
 window.onload = function () {
   changeBodyColor();
-  //generateTable();
   writeMarketStatus();
   calculateTime();
   isBusinesDay();
@@ -64,6 +63,7 @@ function upperCase() {
   x.value = x.value.toUpperCase();
 }
 
+
 function isMarketOpen() {
   let now = new Date();
   let hour = now.getHours();
@@ -93,12 +93,23 @@ function isBusinesDay() {
   let today = new Date();
   let day = today.getDay();
   let dayList = ["Sunday", "Monday", "Tuesday", "Wednesday ", "Thursday", "Friday", "Saturday",];
+  let message;
+
   if (day != 0 && day != 6) {
-    document.getElementById('day-open').innerHTML = `The Markets Are Open On ${dayList[day]}`;
+    // The stock market is open on a weekday
+    if (isMarketOpen()) {
+      message = `The Markets Are Open On ${dayList[day]} From 9:30am Till 4:00pm`;
+    } else {
+      message = `The Markets Are Closed On ${dayList[day]}`;
+    }
   } else {
-    document.getElementById('day-open').innerHTML = `The Markets Are Closed On ${dayList[day]}`;
+    // The stock market is closed on weekends
+    message = `The Markets Are Closed On ${dayList[day]}`;
   }
+  
+  document.getElementById('day-open').innerHTML = message;
 }
+
 
 function dateToMinutes(date) {
   const hours = date.getHours();
