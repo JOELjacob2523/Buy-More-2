@@ -100,7 +100,7 @@ function isBusinesDay() {
     if (isMarketOpen()) {
       message = `The Markets Are Open On ${dayList[day]} From 9:30am Till 4:00pm`;
     } else {
-      message = `The Markets Are Closed On ${dayList[day]}`;
+      message = `The Markets Are Closed On ${dayList[day]} At This Time`;
     }
   } else {
     // The stock market is closed on weekends
