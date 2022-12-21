@@ -1,6 +1,5 @@
 window.onload = function () {
   changeBodyColor();
-  writeMarketStatus();
   calculateTime();
   isBusinesDay();
   getResults();
@@ -72,11 +71,6 @@ function isMarketOpen() {
   return hour >= 9.5 && hour <= 16;
 }
 
-function writeMarketStatus() {
-  let marketStatus = isMarketOpen() ? `Markets are now open` : `Markets are closed`;
-  document.getElementById('market-status').innerHTML = marketStatus;
-}
-
 setInterval(function () {
   let now = new Date().toLocaleString();
   document.getElementById('date').innerHTML = now;
@@ -107,7 +101,7 @@ function isBusinesDay() {
     message = `The Markets Are Closed On ${dayList[day]}`;
   }
   
-  document.getElementById('day-open').innerHTML = message;
+  document.getElementById('market-status').innerHTML = message;
 }
 
 
