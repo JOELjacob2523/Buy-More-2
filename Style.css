@@ -1,11 +1,11 @@
 body.open {
-  background-color: wheat;
-  color: maroon;
+  background-color: lightblue;
+  color: darkblue;
 }
 
 body.closed {
-  background-color: maroon;
-  color: wheat;
+  background-color: darkblue;
+  color: lightblue;
 }
 
 h1 {
@@ -30,19 +30,29 @@ h3 {
 }
 
 table {
-  width: 50%;
-  height: 30%;
-  margin: auto;
+  width: 75%;
+  height: 50%;
+  margin-left: 400px;
+  margin-right: 300px;
   background-color: bisque;
   color: blue;
+  border-radius: 20px;
+}
+
+tr {
+  height: 75px;
+  font-size: x-large;
+  font-weight: bold;
+  border-radius: 20px;
 }
 
 th {
   background-color: rgb(209, 243, 141);
   border-radius: 10%;
-  height: 20%;
+  height: 50%;
   color: rgb(255, 145, 105);
   font-size: large;
+  border-radius: 20px;
 }
 
 tr:nth-child(even) {
@@ -59,11 +69,12 @@ tr:hover {
   color: wheat;
   background-color: green;
   border-color: deepskyblue;
+  margin: auto;
 }
 
 td {
   width: 20%;
-  height: 30%;
+  height: 50%;
   text-align: center;
 }
 
@@ -81,6 +92,7 @@ td {
   padding: 10px;
   margin-right: auto;
   margin-left: auto;
+  margin-top: auto;
   font-size: large;
 }
 
@@ -102,10 +114,4 @@ input[type=text],
   position: fixed;
   top: 20%;
   margin-left: 70px;
-}
-
-#day-open {
-  text-align: center;
-  font-size: xx-large;
-  font-weight: bold;
 }

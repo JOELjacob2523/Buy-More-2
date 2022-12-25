@@ -1,7 +1,7 @@
 window.onload = function () {
   changeBodyColor();
   calculateTime();
-  isBusinesDay();
+  writeMessage();
   getResults();
 }
 
@@ -76,33 +76,52 @@ setInterval(function () {
   document.getElementById('date').innerHTML = now;
 }, 1000);
 
-function changeBodyColor() {
-  let body = document.body;
-  let marketStatus = isMarketOpen();
-  body.classList.add(marketStatus ? 'open' : 'closed');
-  body.classList.remove(marketStatus ? 'closed' : 'open');
-}
 
 function isBusinesDay() {
+  let today = new Date();
+  let day = today.getDay();
+  return day !== 0 && day !== 6;
+}
+
+function writeMessage(){
   let today = new Date();
   let day = today.getDay();
   let dayList = ["Sunday", "Monday", "Tuesday", "Wednesday ", "Thursday", "Friday", "Saturday",];
   let message;
 
-  if (day != 0 && day != 6) {
-    // The stock market is open on a weekday
+  if (isBusinesDay()) {
     if (isMarketOpen()) {
       message = `The Markets Are Open On ${dayList[day]} From 9:30am Till 4:00pm`;
     } else {
       message = `The Markets Are Closed On ${dayList[day]} At This Time`;
     }
   } else {
-    // The stock market is closed on weekends
     message = `The Markets Are Closed On ${dayList[day]}`;
   }
-  
+
   document.getElementById('market-status').innerHTML = message;
 }
+
+function changeBodyColor() {
+  let body = document.body;
+  let marketHour = isMarketOpen();
+  let marketDay = isBusinesDay();
+
+  if (marketDay) {
+    if (marketHour){
+    body.classList.add('open');
+    body.classList.remove('closed');
+    }else {
+      body.classList.add('closed');
+      body.classList.remove('open');
+    }
+  } else {
+    body.classList.add('closed');
+    body.classList.remove('open');
+  }
+  console.log(marketDay);
+}
+
 
 
 function dateToMinutes(date) {
@@ -141,12 +160,12 @@ function minutesToTime(minutes) {
 
 async function getResults() {
   for (let i = 0; i < companies.length; i++) {
-   let company = companies[i];
-  let body = await fetch(`https://api.polygon.io/v2/aggs/ticker/${company.ticker}/prev?adjusted=true&apiKey=eCpvZg_ZruTkRqlOEuoyJLEBn_VkmaeV`);
-  let response = await body.json();
-  let cValue = await response.results[0].c;
-  console.log(cValue);
-  company.price = cValue;
+    let company = companies[i];
+    let body = await fetch(`https://api.polygon.io/v2/aggs/ticker/${company.ticker}/prev?adjusted=true&apiKey=eCpvZg_ZruTkRqlOEuoyJLEBn_VkmaeV`);
+    let response = await body.json();
+    let cValue = await response.results[0].c;
+    console.log(cValue);
+    company.price = cValue;
   }
   generateTable();
 }
