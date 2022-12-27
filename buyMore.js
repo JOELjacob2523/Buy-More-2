@@ -83,7 +83,7 @@ function isBusinesDay() {
   return day !== 0 && day !== 6;
 }
 
-function writeMessage(){
+function writeMessage() {
   let today = new Date();
   let day = today.getDay();
   let dayList = ["Sunday", "Monday", "Tuesday", "Wednesday ", "Thursday", "Friday", "Saturday",];
@@ -108,10 +108,10 @@ function changeBodyColor() {
   let marketDay = isBusinesDay();
 
   if (marketDay) {
-    if (marketHour){
-    body.classList.add('open');
-    body.classList.remove('closed');
-    }else {
+    if (marketHour) {
+      body.classList.add('open');
+      body.classList.remove('closed');
+    } else {
       body.classList.add('closed');
       body.classList.remove('open');
     }
@@ -161,11 +161,15 @@ function minutesToTime(minutes) {
 async function getResults() {
   for (let i = 0; i < companies.length; i++) {
     let company = companies[i];
+    try{
     let body = await fetch(`https://api.polygon.io/v2/aggs/ticker/${company.ticker}/prev?adjusted=true&apiKey=eCpvZg_ZruTkRqlOEuoyJLEBn_VkmaeV`);
     let response = await body.json();
     let cValue = await response.results[0].c;
     console.log(cValue);
     company.price = cValue;
+    }catch(err){
+      console.log(err);
+    }
   }
-  generateTable();
+generateTable();
 }
